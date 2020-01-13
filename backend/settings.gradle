@@ -1,0 +1,5 @@
+rootProject.name = 'docman'
+
+include 'docman-boot'
+include 'docman-main'
+include 'docman-infrastructure'

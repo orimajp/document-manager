@@ -1,0 +1,64 @@
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+    testImplementation project(path: ':docman-infrastructure', configuration: 'testInfrastructure')
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.session:spring-session-data-redis'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.5.3'
+    runtimeOnly 'org.seasar.doma.boot:doma-spring-boot-starter:1.2.1'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+	testImplementation 'org.springframework.security:spring-security-test'
+
+    testRuntimeOnly "org.seasar.doma:doma:2.25.1"
+    testRuntimeOnly 'org.seasar.doma.boot:doma-spring-boot-starter:1.2.1'
+
+	testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.springframework.boot:spring-boot-starter-freemarker'
+    testRuntimeOnly 'org.springframework.boot:spring-boot-starter-mail'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: 'eclipse'
+
+eclipse {
+    classpath {
+        file {
+            whenMerged { classpath ->
+                classpath.entries.removeAll { it.kind == "con" }
+            }
+            withXml { provider ->
+                def node = provider.asNode()
+                node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/'])
+                node.appendNode( 'classpathentry', [ kind: 'src', output: 'bin/main', path: '.apt_generated'])
+            }
+        }
+    }
+    jdt {
+        file {
+            withProperties {properties ->
+                properties.setProperty('org.eclipse.jdt.core.compiler.processAnnotations', 'enabled')
+                properties.setProperty('org.eclipse.jdt.core.circularClasspath', 'warning')
+            }
+        }
+    }
+}

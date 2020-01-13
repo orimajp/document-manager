@@ -1,0 +1,54 @@
+plugins {
+    id "org.springframework.boot"
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'DocmanApplication'
+    }
+}
+
+dependencies {
+    implementation project(':docman-infrastructure')
+    runtimeOnly project(':docman-main')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-security'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-data-redis'
+    runtimeOnly 'org.springframework.session:spring-session-data-redis'
+    runtimeOnly 'org.seasar.doma.boot:doma-spring-boot-starter:1.2.1'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-freemarker'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+eclipse {
+    classpath {
+        file {
+            whenMerged { classpath ->
+                classpath.entries.removeAll { it.kind == "con" }
+            }
+            withXml { provider ->
+                def node = provider.asNode()
+                node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/'])
+                node.appendNode( 'classpathentry', [ kind: 'src', output: 'bin/main', path: '.apt_generated'])
+            }
+        }
+    }
+    jdt {
+        file {
+            withProperties {properties ->
+                properties.setProperty('org.eclipse.jdt.core.compiler.processAnnotations', 'enabled')
+                properties.setProperty('org.eclipse.jdt.core.circularClasspath', 'warning')
+            }
+        }
+    }
+}

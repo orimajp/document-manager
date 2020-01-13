@@ -1,0 +1,100 @@
+task copyDomaResources(type: Sync)  {
+    from sourceSets.main.resources.srcDirs
+    into compileJava.destinationDir
+    include 'doma.compile.config'
+    include 'META-INF/**/*.sql'
+    include 'META-INF/**/*.script'
+}
+
+compileJava {
+    // Depend on the above task
+    dependsOn copyDomaResources
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+    // Disable the annotation processors during the test run
+    options.compilerArgs = ['-proc:none']
+}
+
+configurations {
+    testInfrastructure
+}
+
+task testInfrastructureJar(type: Jar) {
+    from sourceSets.main.output
+}
+
+artifacts {
+    testInfrastructure testInfrastructureJar
+}
+
+dependencies {
+    implementation project(':docman-main')
+    implementation('org.springframework.boot:spring-boot-starter')
+
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.5.3'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    annotationProcessor "org.seasar.doma:doma:2.25.1"
+    implementation "org.seasar.doma:doma:2.25.1"
+    implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.2.1'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: 'eclipse'
+
+eclipse {
+    classpath {
+        file {
+            whenMerged { classpath ->
+                classpath.entries.removeAll { it.kind == "con" }
+            }
+            withXml { provider ->
+                def node = provider.asNode()
+                node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/'])
+                node.appendNode( 'classpathentry', [ kind: 'src', output: 'bin/main', path: '.apt_generated'])
+            }
+        }
+    }
+    jdt {
+        file {
+            withProperties {properties ->
+                properties.setProperty('org.eclipse.jdt.core.compiler.processAnnotations', 'enabled')
+                properties.setProperty('org.eclipse.jdt.core.circularClasspath', 'warning')
+            }
+        }
+    }
+}
+
+eclipseJdt {
+    doLast {
+        def eclipseAptPrefsFile = '.settings/org.eclipse.jdt.apt.core.prefs'
+        file('.factorypath').withWriter { writer ->
+            def domaJar = configurations.annotationProcessor.find {
+                it.name.startsWith('doma-2')
+            }
+            new groovy.xml.MarkupBuilder(writer).factorypath() {
+                factorypathentry(kind:'EXTJAR', id:domaJar, enabled:true, runInBatchMode:false)
+            }
+        }
+        mkdir('.apt_generated')
+        project.file(eclipseAptPrefsFile).write """\
+                |eclipse.preferences.version=1
+                |org.eclipse.jdt.apt.aptEnabled=true
+                |org.eclipse.jdt.apt.genSrcDir=.apt_generated
+                |org.eclipse.jdt.apt.reconcileEnabled=true
+                |""".stripMargin()
+    }
+}
