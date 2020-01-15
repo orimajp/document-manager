@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * サイト表示コントローラ
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -12,5 +15,4 @@ import org.springframework.web.bind.annotation.RestController;
 public class SiteViewController {
     // チーム一覧
     // 全ドキュメント一覧
-    // チーム別ドキュメント一覧
 }

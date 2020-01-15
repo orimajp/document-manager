@@ -1,4 +1,4 @@
-package com.github.orimajp.docman.presentation.management.controller.user;
+package com.github.orimajp.docman.presentation.view.controller.team;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * ユーザ管理
+ * チーム表示コントローラ
  */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/api/management/user")
-public class UserManagementController {
+@RequestMapping("v1/api/view/team")
+public class TeamViewController {
 
-    // ユーザ登録、更新、削除、パスワード変更
+    // チーム情報表示
+    // チーム別ドキュメント一覧
 
 }
