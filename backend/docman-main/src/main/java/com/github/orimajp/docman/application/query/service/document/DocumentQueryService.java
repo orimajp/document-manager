@@ -1,9 +1,11 @@
 package com.github.orimajp.docman.application.query.service.document;
 
 import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
 
@@ -35,5 +37,13 @@ public interface DocumentQueryService {
      * @return ドキュメント構造dokyumentokouzou
      */
     GetDocumentStructureAppResponse getDocumentStructure(GetDocumentStructureAppRequest request);
+
+    /**
+     * ドキュメント検索データ取得
+     *
+     * @param requset ドキュメント検索データ取得アプリケーションリクエスト
+     * @return ドキュメント検索データ
+     */
+    GetDocumentSearchDataAppResponse getDocumentSearchData(GetDocumentSearchDataAppRequset requset);
 
 }

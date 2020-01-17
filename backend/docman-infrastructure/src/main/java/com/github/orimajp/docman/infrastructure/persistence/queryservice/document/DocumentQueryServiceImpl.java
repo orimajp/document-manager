@@ -1,9 +1,11 @@
 package com.github.orimajp.docman.infrastructure.persistence.queryservice.document;
 
 import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
 import com.github.orimajp.docman.application.query.service.document.DocumentQueryService;
@@ -49,6 +51,17 @@ public class DocumentQueryServiceImpl implements DocumentQueryService {
      */
     @Override
     public GetDocumentStructureAppResponse getDocumentStructure(GetDocumentStructureAppRequest request) {
+        return null;
+    }
+
+    /**
+     * ドキュメント検索データ取得
+     *
+     * @param requset ドキュメント検索データ取得アプリケーションリクエスト
+     * @return ドキュメント検索データ
+     */
+    @Override
+    public GetDocumentSearchDataAppResponse getDocumentSearchData(GetDocumentSearchDataAppRequset requset) {
         return null;
     }
 

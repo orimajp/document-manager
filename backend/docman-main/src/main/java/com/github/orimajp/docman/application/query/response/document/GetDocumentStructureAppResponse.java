@@ -3,6 +3,7 @@ package com.github.orimajp.docman.application.query.response.document;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +17,9 @@ public class GetDocumentStructureAppResponse {
 
     /** トップドキュメントレイヤー */
     private final DocumentLayer documentLayer;
+
+    /** 更新日時 */
+    private final LocalDateTime layerUpdateDateTime;
 
     /**
      * ドキュメントレイヤー
