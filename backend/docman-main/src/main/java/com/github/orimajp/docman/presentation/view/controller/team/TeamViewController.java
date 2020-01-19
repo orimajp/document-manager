@@ -1,5 +1,6 @@
 package com.github.orimajp.docman.presentation.view.controller.team;
 
+import com.github.orimajp.docman.application.query.service.team.TeamQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("v1/view/teams")
 public class TeamViewController {
+
+    private final TeamQueryService teamQueryService;
 
     // チーム情報表示
     // チーム別ドキュメント一覧

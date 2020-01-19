@@ -1,5 +1,6 @@
 package com.github.orimajp.docman.presentation.view.controller.asset;
 
+import com.github.orimajp.docman.application.query.service.asset.AssetQueryService;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetDataResponse;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetListResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("v1/view/assets")
 public class AssetViewController {
+
+    private final AssetQueryService assetQueryService;
 
     // アセットリスト取得
     @GetMapping
