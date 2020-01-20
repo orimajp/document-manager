@@ -1,6 +1,9 @@
 package com.github.orimajp.docman.presentation.view.controller.team;
 
+import com.github.orimajp.docman.application.query.request.team.GetTeamInformationAppRequest;
+import com.github.orimajp.docman.application.query.response.team.GetTeamInformationAppResponse;
 import com.github.orimajp.docman.application.query.service.team.TeamQueryService;
+import com.github.orimajp.docman.presentation.view.response.team.GetTeamInformationResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,8 @@ public class TeamViewController {
 
     private final TeamQueryService teamQueryService;
 
+    private final TeamViewConvertor teamViewConvertor;
+
     // チーム情報表示
     // チーム別ドキュメント一覧
 
@@ -34,6 +39,11 @@ public class TeamViewController {
     // チーム情報取得
     @GetMapping("{teamId}")
     public ResponseEntity<Object> getTeamData(@PathVariable("teamId") String teamId) {
+
+        final GetTeamInformationAppRequest getTeamInformationAppRequest = new GetTeamInformationAppRequest();
+        final GetTeamInformationAppResponse getTeamInformationAppResponse = teamQueryService.getTeamInformation(getTeamInformationAppRequest);
+        final GetTeamInformationResponse getTeamInformationResponse = teamViewConvertor.createGetTeamInformationResponse(getTeamInformationAppResponse);
+
         return ResponseEntity.noContent().build();
     }
 

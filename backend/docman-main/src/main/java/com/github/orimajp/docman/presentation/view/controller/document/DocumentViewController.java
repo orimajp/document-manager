@@ -1,6 +1,18 @@
 package com.github.orimajp.docman.presentation.view.controller.document;
 
+import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
 import com.github.orimajp.docman.application.query.service.document.DocumentQueryService;
+import com.github.orimajp.docman.presentation.view.response.document.GetDocumentDataResponse;
+import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
+import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
+import com.github.orimajp.docman.presentation.view.response.document.GetPageDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +33,8 @@ public class DocumentViewController {
 
     private final DocumentQueryService documentQueryService;
 
+    private final DocumentViewConvertor documentViewConvertor;
+
     // 単独ドキュメント
     // 単ページ
     // ページツリー
@@ -38,6 +52,11 @@ public class DocumentViewController {
     // ドキュメントデータ取得
     @GetMapping("{documentId}")
     public ResponseEntity<Object> getDocumentData(@PathVariable("documentId") String documentId) {
+
+        final GetDocumentDataAppRequest getDocumentDataAppRequest = new GetDocumentDataAppRequest();
+        final GetDocumentDataAppResponse getDocumentDataAppResponse = documentQueryService.getDocumentData(getDocumentDataAppRequest);
+        final GetDocumentDataResponse getDocumentDataResponse = documentViewConvertor.createGetDocumentDataResponse(getDocumentDataAppResponse);
+
         return ResponseEntity.noContent().build();
     }
 
@@ -45,18 +64,33 @@ public class DocumentViewController {
     @GetMapping("{documentId}/pages/{pageId}")
     public ResponseEntity<Object> getDocumentPageData(@PathVariable("documentId") String documentId,
             @PathVariable("pageId") String pageId) {
+
+        final GetPageDataAppRequest getPageDataAppRequest = new GetPageDataAppRequest();
+        final GetPageDataAppResponse getPageDataAppResponse = documentQueryService.getPageData(getPageDataAppRequest);
+        final GetPageDataResponse getPageDataResponse = documentViewConvertor.createGetPageDataResponse(getPageDataAppResponse);
+
         return ResponseEntity.noContent().build();
     }
 
     // ドキュメントツリー取得
     @GetMapping("{documentId}/tree")
     public ResponseEntity<Object> getDocumentTree(@PathVariable("documentId") String documentId) {
+
+        final GetDocumentStructureAppRequest getDocumentStructureAppRequest = new GetDocumentStructureAppRequest();
+        final GetDocumentStructureAppResponse getDocumentStructureAppResponse = documentQueryService.getDocumentStructure(getDocumentStructureAppRequest);
+        final GetDocumentStructureResponse getDocumentStructureResponse = documentViewConvertor.createGetDocumentStructureResponse(getDocumentStructureAppResponse);
+
         return ResponseEntity.noContent().build();
     }
 
     // 検索データ取得
     @GetMapping("{documentId}/searchdata")
     public ResponseEntity<Object> getDocumentSearchData(@PathVariable("documentId") String documentId) {
+
+        final GetDocumentSearchDataAppRequset getDocumentSearchDataAppRequset = new GetDocumentSearchDataAppRequset();
+        final GetDocumentSearchDataAppResponse getDocumentSearchDataAppResponse = documentQueryService.getDocumentSearchData(getDocumentSearchDataAppRequset);
+        final GetDocumentSearchDataResponse getDocumentSearchDataResponse = documentViewConvertor.createGetDocumentSearchDataResponse(getDocumentSearchDataAppResponse);
+
         return ResponseEntity.noContent().build();
     }
 

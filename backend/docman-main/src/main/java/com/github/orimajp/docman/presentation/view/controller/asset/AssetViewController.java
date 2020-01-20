@@ -1,5 +1,7 @@
 package com.github.orimajp.docman.presentation.view.controller.asset;
 
+import com.github.orimajp.docman.application.query.request.asset.GetAssetDataAppRequest;
+import com.github.orimajp.docman.application.query.response.asset.GetAssetDataAppResponse;
 import com.github.orimajp.docman.application.query.service.asset.AssetQueryService;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetDataResponse;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetListResponse;
@@ -23,6 +25,8 @@ public class AssetViewController {
 
     private final AssetQueryService assetQueryService;
 
+    private final AssetViewConvertor assetViewConvertor;
+
     // アセットリスト取得
     @GetMapping
     public ResponseEntity<Object> getAssetList(@RequestParam("documentId") String documentId,
@@ -38,7 +42,11 @@ public class AssetViewController {
     public ResponseEntity<Object> getAssetData(@PathVariable("assetId") String assetId) {
         // TODO
         // TODO ダウンロード
-        final GetAssetDataResponse response = new GetAssetDataResponse();
+
+        final GetAssetDataAppRequest getAssetDataAppRequest = new GetAssetDataAppRequest();
+        final GetAssetDataAppResponse getAssetDataAppResponse = assetQueryService.getAsset(getAssetDataAppRequest);
+        final GetAssetDataResponse response = assetViewConvertor.createGetAssetDataResponse(getAssetDataAppResponse);
+
         return ResponseEntity.ok(response);
     }
 
