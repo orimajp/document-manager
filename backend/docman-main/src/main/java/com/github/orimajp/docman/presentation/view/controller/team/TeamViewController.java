@@ -40,11 +40,11 @@ public class TeamViewController {
     @GetMapping("{teamId}")
     public ResponseEntity<Object> getTeamData(@PathVariable("teamId") String teamId) {
 
-        final GetTeamInformationAppRequest getTeamInformationAppRequest = new GetTeamInformationAppRequest();
+        final GetTeamInformationAppRequest getTeamInformationAppRequest = GetTeamInformationAppRequest.of(teamId);
         final GetTeamInformationAppResponse getTeamInformationAppResponse = teamQueryService.getTeamInformation(getTeamInformationAppRequest);
         final GetTeamInformationResponse getTeamInformationResponse = teamViewConvertor.createGetTeamInformationResponse(getTeamInformationAppResponse);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(getTeamInformationResponse);
     }
 
 }

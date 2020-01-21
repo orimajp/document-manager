@@ -34,7 +34,7 @@ public class SiteViewController {
         final GetSiteInformationAppResponse getSiteInformationAppResponse = siteQueryService.getSiteInformation(getSiteInformationAppRequest);
         final GetSiteInformationResponse getSiteInformationResponse = siteViewConvertor.createGetSiteInformationResponse(getSiteInformationAppResponse);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(getSiteInformationResponse);
     }
 
 }

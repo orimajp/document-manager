@@ -43,7 +43,7 @@ public class AssetViewController {
         // TODO
         // TODO ダウンロード
 
-        final GetAssetDataAppRequest getAssetDataAppRequest = new GetAssetDataAppRequest();
+        final GetAssetDataAppRequest getAssetDataAppRequest = GetAssetDataAppRequest.of(assetId);
         final GetAssetDataAppResponse getAssetDataAppResponse = assetQueryService.getAsset(getAssetDataAppRequest);
         final GetAssetDataResponse response = assetViewConvertor.createGetAssetDataResponse(getAssetDataAppResponse);
 
