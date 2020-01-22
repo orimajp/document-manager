@@ -1,9 +1,11 @@
 package com.github.orimajp.docman.presentation.view.controller.document;
 
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
+import com.github.orimajp.docman.presentation.view.request.document.GetDocumentListResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
@@ -12,6 +14,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DocumentViewConvertor {
+
+    GetDocumentListResponse createGetDocumentListResponse(GetDocumentListAppResponse getDocumentListAppResponse) {
+        // TODO
+        final GetDocumentListResponse getDocumentListResponse = new GetDocumentListResponse();
+        return getDocumentListResponse;
+    }
 
     GetDocumentDataResponse createGetDocumentDataResponse(GetDocumentDataAppResponse getDocumentDataAppResponse) {
         // TODO

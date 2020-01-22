@@ -1,9 +1,12 @@
 package com.github.orimajp.docman.presentation.view.controller.team;
 
 import com.github.orimajp.docman.application.query.request.team.GetTeamInformationAppRequest;
+import com.github.orimajp.docman.application.query.request.team.GetTeamListAppRequest;
 import com.github.orimajp.docman.application.query.response.team.GetTeamInformationAppResponse;
+import com.github.orimajp.docman.application.query.response.team.GetTeamListAppResponse;
 import com.github.orimajp.docman.application.query.service.team.TeamQueryService;
 import com.github.orimajp.docman.presentation.view.response.team.GetTeamInformationResponse;
+import com.github.orimajp.docman.presentation.view.response.team.GetTeamListResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +36,13 @@ public class TeamViewController {
     @GetMapping
     public ResponseEntity<Object> getTeamList(@RequestParam("page") Integer page,
             @RequestParam("limit") Integer limit) {
-        return ResponseEntity.noContent().build();
+
+        final GetTeamListAppRequest getTeamListAppRequest = GetTeamListAppRequest.builder()
+                .page(page).limit(limit).build();
+        final GetTeamListAppResponse getTeamListAppResponse = teamQueryService.getTeamList(getTeamListAppRequest);
+        final GetTeamListResponse getTeamListResponse = teamViewConvertor.createGetTeamListResponse(getTeamListAppResponse);
+
+        return ResponseEntity.ok(getTeamListResponse);
     }
 
     // チーム情報取得

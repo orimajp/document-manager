@@ -12,4 +12,6 @@ public class GetPageDataAppRequest {
 
     private final String documentId;
 
+    private final String pageId;
+
 }

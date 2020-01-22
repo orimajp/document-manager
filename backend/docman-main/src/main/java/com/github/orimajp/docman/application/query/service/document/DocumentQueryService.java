@@ -1,10 +1,12 @@
 package com.github.orimajp.docman.application.query.service.document;
 
 import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentListAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
@@ -13,6 +15,14 @@ import com.github.orimajp.docman.application.query.response.document.GetPageData
  * ドキュメントクエリサービスインタフェース
  */
 public interface DocumentQueryService {
+
+    /**
+     * ドキュメントリスト取得
+     *
+     * @param request ドキュメントリストアプリケーションリクエストクラス
+     * @return ドキュメントリスト
+     */
+    GetDocumentListAppResponse getDocumentList(GetDocumentListAppRequest request);
 
     /**
      * ドキュメントデータ取得

@@ -1,7 +1,9 @@
 package com.github.orimajp.docman.presentation.view.controller.asset;
 
 import com.github.orimajp.docman.application.query.request.asset.GetAssetDataAppRequest;
+import com.github.orimajp.docman.application.query.request.asset.GettAssetListAppRequest;
 import com.github.orimajp.docman.application.query.response.asset.GetAssetDataAppResponse;
+import com.github.orimajp.docman.application.query.response.asset.GetAssetListAppResponse;
 import com.github.orimajp.docman.application.query.service.asset.AssetQueryService;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetDataResponse;
 import com.github.orimajp.docman.presentation.view.response.asset.GetAssetListResponse;
@@ -33,7 +35,12 @@ public class AssetViewController {
             @RequestParam("teamId") String teamId, @RequestParam("page") Integer page,
             @RequestParam("limit") Integer limit) {
         // TODO
-        final GetAssetListResponse response = new GetAssetListResponse();
+
+        final GettAssetListAppRequest gettAssetListAppRequest = GettAssetListAppRequest.builder()
+                .documentId(documentId).tempId(teamId).page(page).limit(limit).build();
+        final GetAssetListAppResponse getAssetListAppResponse = assetQueryService.getAssetList(gettAssetListAppRequest);
+        final GetAssetListResponse response = assetViewConvertor.createGetAssetListResponse(getAssetListAppResponse);
+
         return ResponseEntity.ok(response);
     }
 

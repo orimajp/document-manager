@@ -1,14 +1,17 @@
 package com.github.orimajp.docman.presentation.view.controller.document;
 
 import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentListAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
 import com.github.orimajp.docman.application.query.service.document.DocumentQueryService;
+import com.github.orimajp.docman.presentation.view.request.document.GetDocumentListResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
@@ -46,12 +49,19 @@ public class DocumentViewController {
     @GetMapping
     public ResponseEntity<Object> getDocumentList(@RequestParam("teamId") String teamId,
             @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
-        return ResponseEntity.noContent().build();
+
+        final GetDocumentListAppRequest getDocumentListAppRequest = GetDocumentListAppRequest.builder()
+                .tempId(teamId).page(page).limit(limit).build();
+        final GetDocumentListAppResponse getDocumentListAppResponse = documentQueryService.getDocumentList(getDocumentListAppRequest);
+        final GetDocumentListResponse getDocumentListResponse = documentViewConvertor.createGetDocumentListResponse(getDocumentListAppResponse);
+
+        return ResponseEntity.ok(getDocumentListResponse);
     }
 
     // ドキュメントデータ取得
     @GetMapping("{documentId}")
     public ResponseEntity<Object> getDocumentData(@PathVariable("documentId") String documentId) {
+
         final GetDocumentDataAppRequest getDocumentDataAppRequest = GetDocumentDataAppRequest.of(documentId);
         final GetDocumentDataAppResponse getDocumentDataAppResponse = documentQueryService.getDocumentData(getDocumentDataAppRequest);
         final GetDocumentDataResponse getDocumentDataResponse = documentViewConvertor.createGetDocumentDataResponse(getDocumentDataAppResponse);
@@ -64,7 +74,7 @@ public class DocumentViewController {
     public ResponseEntity<Object> getDocumentPageData(@PathVariable("documentId") String documentId,
             @PathVariable("pageId") String pageId) {
 
-        final GetPageDataAppRequest getPageDataAppRequest = GetPageDataAppRequest.of(documentId);
+        final GetPageDataAppRequest getPageDataAppRequest = GetPageDataAppRequest.of(documentId, pageId);
         final GetPageDataAppResponse getPageDataAppResponse = documentQueryService.getPageData(getPageDataAppRequest);
         final GetPageDataResponse getPageDataResponse = documentViewConvertor.createGetPageDataResponse(getPageDataAppResponse);
 

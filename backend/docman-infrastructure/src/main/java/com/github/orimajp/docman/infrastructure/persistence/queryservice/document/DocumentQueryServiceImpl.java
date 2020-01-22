@@ -1,10 +1,12 @@
 package com.github.orimajp.docman.infrastructure.persistence.queryservice.document;
 
 import com.github.orimajp.docman.application.query.request.document.GetDocumentDataAppRequest;
+import com.github.orimajp.docman.application.query.request.document.GetDocumentListAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentSearchDataAppRequset;
 import com.github.orimajp.docman.application.query.request.document.GetDocumentStructureAppRequest;
 import com.github.orimajp.docman.application.query.request.document.GetPageDataAppRequest;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
@@ -20,6 +22,17 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DocumentQueryServiceImpl implements DocumentQueryService {
+
+    /**
+     * ドキュメントリスト取得
+     *
+     * @param request ドキュメントリストアプリケーションリクエストクラス
+     * @return ドキュメントリスト
+     */
+    @Override
+    public GetDocumentListAppResponse getDocumentList(GetDocumentListAppRequest request) {
+        return null;
+    }
 
     /**
      * ドキュメントデータ取得
