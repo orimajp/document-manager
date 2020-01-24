@@ -1,30 +1,37 @@
 package com.github.orimajp.docman.application.query.response.document;
 
+import java.time.LocalDateTime;
+
 /**
  * ドキュメントデータ取得アプリケーションレスポンスクラス
  */
 public class GetDocumentDataAppResponse {
 
-    // ドキュメントキー
+    /** ドキュメントキー */
+    private String documentKey;
 
-    // ドキュメントタイトル
+    /** ドキュメントタイトル */
+    private String documentTitle;
 
-    // ドキュメントデータ
+    /** 説明 */
+    private String description;
 
-    // 作成日
-    // 作成者ID
-    // 作成者名
+    /** 作成日時 */
+    private LocalDateTime createDateTime;
 
-    // 更新日時
-    // 更新者ID
-    // 更新者名
+    /** 作成者名 */
+    private String createUserName;
 
-    // ドキュメントリビジョン
+    /** 更新日時 */
+    private LocalDateTime updateDateTime;
 
-    // バージョン
+    /** 更新者名 */
+    private String updateUserName;
 
+    /** リビジョン */
+    private Integer revision;
 
-
-
+    /** バージョン */
+    private Integer version;
 
 }
