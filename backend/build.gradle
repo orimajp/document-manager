@@ -17,7 +17,7 @@ buildscript {
 }
 
 plugins {
-    id "org.springframework.boot" version "2.2.2.RELEASE" apply false
+    id "org.springframework.boot" version "2.2.3.RELEASE" apply false
 }
 
 allprojects {

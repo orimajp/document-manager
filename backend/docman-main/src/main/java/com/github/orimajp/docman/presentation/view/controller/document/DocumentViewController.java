@@ -9,13 +9,13 @@ import com.github.orimajp.docman.application.query.response.document.GetDocument
 import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
-import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentPageDataAppResponse;
 import com.github.orimajp.docman.application.query.service.document.DocumentQueryService;
 import com.github.orimajp.docman.presentation.view.request.document.GetDocumentListResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
-import com.github.orimajp.docman.presentation.view.response.document.GetPageDataResponse;
+import com.github.orimajp.docman.presentation.view.response.document.GetDocumentPageDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -75,10 +75,10 @@ public class DocumentViewController {
             @PathVariable("pageId") String pageId) {
 
         final GetPageDataAppRequest getPageDataAppRequest = GetPageDataAppRequest.of(documentId, pageId);
-        final GetPageDataAppResponse getPageDataAppResponse = documentQueryService.getPageData(getPageDataAppRequest);
-        final GetPageDataResponse getPageDataResponse = documentViewConvertor.createGetPageDataResponse(getPageDataAppResponse);
+        final GetDocumentPageDataAppResponse getDocumentPageDataAppResponse = documentQueryService.getPageData(getPageDataAppRequest);
+        final GetDocumentPageDataResponse getDocumentPageDataResponse = documentViewConvertor.createGetPageDataResponse(getDocumentPageDataAppResponse);
 
-        return ResponseEntity.ok(getPageDataResponse);
+        return ResponseEntity.ok(getDocumentPageDataResponse);
     }
 
     // ドキュメントツリー取得

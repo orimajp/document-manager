@@ -9,11 +9,13 @@ import com.github.orimajp.docman.application.query.response.document.GetDocument
 import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
-import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentPageDataAppResponse;
 import com.github.orimajp.docman.application.query.service.document.DocumentQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * ドキュメントクエリサービスクラス
@@ -52,8 +54,21 @@ public class DocumentQueryServiceImpl implements DocumentQueryService {
      * @return ページデータ
      */
     @Override
-    public GetPageDataAppResponse getPageData(GetPageDataAppRequest request) {
-        return null;
+    public GetDocumentPageDataAppResponse getPageData(GetPageDataAppRequest request) {
+        final GetDocumentPageDataAppResponse response = new GetDocumentPageDataAppResponse();
+
+        response.setPageKey("pagekey");
+        response.setPageTitle("title");
+        response.setPageData("data");
+        response.setDocumentKey("dockey");
+        response.setCreateDateTime(LocalDateTime.now());
+        response.setCreateUserName("createuser");
+        response.setUpdateDateTime(LocalDateTime.now());
+        response.setUpdateUserName("updateuser");
+        response.setRevision(1);
+        response.setVersion(2);
+
+        return response;
     }
 
     /**

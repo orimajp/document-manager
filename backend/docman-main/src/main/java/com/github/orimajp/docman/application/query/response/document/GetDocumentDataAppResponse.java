@@ -13,6 +13,9 @@ public class GetDocumentDataAppResponse {
     /** ドキュメントタイトル */
     private String documentTitle;
 
+    /** チームID */
+    private String teamId;
+
     /** 説明 */
     private String description;
 

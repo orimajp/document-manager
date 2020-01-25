@@ -1,11 +1,14 @@
 package com.github.orimajp.docman.application.query.response.document;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 /**
  * ページデータ取得アプリケーションレスポンスクラス
  */
-public class GetPageDataAppResponse {
+@Data
+public class GetDocumentPageDataAppResponse {
 
     /** ページキー */
     private String pageKey;
@@ -15,6 +18,9 @@ public class GetPageDataAppResponse {
 
     /** ページデータ */
     private String pageData;
+
+    /** ドキュメントキー */
+    private String documentKey;
 
     /** 作成日時 */
     private LocalDateTime createDateTime;

@@ -4,12 +4,12 @@ import com.github.orimajp.docman.application.query.response.document.GetDocument
 import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
-import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentPageDataAppResponse;
 import com.github.orimajp.docman.presentation.view.request.document.GetDocumentListResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
-import com.github.orimajp.docman.presentation.view.response.document.GetPageDataResponse;
+import com.github.orimajp.docman.presentation.view.response.document.GetDocumentPageDataResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,9 +36,9 @@ public class DocumentViewConvertor {
         return new GetDocumentStructureResponse();
     }
 
-    GetPageDataResponse createGetPageDataResponse(GetPageDataAppResponse getPageDataAppResponse) {
+    GetDocumentPageDataResponse createGetPageDataResponse(GetDocumentPageDataAppResponse getDocumentPageDataAppResponse) {
         // TODO
-        return new GetPageDataResponse();
+        return new GetDocumentPageDataResponse();
     }
 
 }

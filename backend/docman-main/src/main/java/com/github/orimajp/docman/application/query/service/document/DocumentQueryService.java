@@ -9,7 +9,7 @@ import com.github.orimajp.docman.application.query.response.document.GetDocument
 import com.github.orimajp.docman.application.query.response.document.GetDocumentListAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentSearchDataAppResponse;
 import com.github.orimajp.docman.application.query.response.document.GetDocumentStructureAppResponse;
-import com.github.orimajp.docman.application.query.response.document.GetPageDataAppResponse;
+import com.github.orimajp.docman.application.query.response.document.GetDocumentPageDataAppResponse;
 
 /**
  * ドキュメントクエリサービスインタフェース
@@ -38,7 +38,7 @@ public interface DocumentQueryService {
      * @param request ページデータ取得アプリケーションリクエスト
      * @return ページデータ
      */
-    GetPageDataAppResponse getPageData(GetPageDataAppRequest request);
+    GetDocumentPageDataAppResponse getPageData(GetPageDataAppRequest request);
 
     /**
      * ドキュメント構造取得

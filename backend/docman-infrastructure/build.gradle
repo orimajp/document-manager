@@ -1,3 +1,5 @@
+import groovy.xml.MarkupBuilder
+
 task copyDomaResources(type: Sync)  {
     from sourceSets.main.resources.srcDirs
     into compileJava.destinationDir
@@ -85,7 +87,7 @@ eclipseJdt {
             def domaJar = configurations.annotationProcessor.find {
                 it.name.startsWith('doma-2')
             }
-            new groovy.xml.MarkupBuilder(writer).factorypath() {
+            new MarkupBuilder(writer).factorypath() {
                 factorypathentry(kind:'EXTJAR', id:domaJar, enabled:true, runInBatchMode:false)
             }
         }
