@@ -1,10 +1,13 @@
 package com.github.orimajp.docman.application.query.response.document;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 /**
  * ドキュメントデータ取得アプリケーションレスポンスクラス
  */
+@Data
 public class GetDocumentDataAppResponse {
 
     /** ドキュメントキー */
