@@ -10,35 +10,34 @@ import com.github.orimajp.docman.presentation.view.response.document.GetDocument
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentSearchDataResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentStructureResponse;
 import com.github.orimajp.docman.presentation.view.response.document.GetDocumentPageDataResponse;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DocumentViewConvertor {
 
+    private final ModelMapper modelMapper;
+
     GetDocumentListResponse createGetDocumentListResponse(GetDocumentListAppResponse getDocumentListAppResponse) {
-        // TODO
-        final GetDocumentListResponse getDocumentListResponse = new GetDocumentListResponse();
-        return getDocumentListResponse;
+        return modelMapper.map(getDocumentListAppResponse, GetDocumentListResponse.class);
     }
 
     GetDocumentDataResponse createGetDocumentDataResponse(GetDocumentDataAppResponse getDocumentDataAppResponse) {
-        // TODO
-        return new GetDocumentDataResponse();
+        return modelMapper.map(getDocumentDataAppResponse, GetDocumentDataResponse.class);
     }
 
     GetDocumentSearchDataResponse createGetDocumentSearchDataResponse(GetDocumentSearchDataAppResponse getDocumentSearchDataAppResponse) {
-        // TODO
-        return new GetDocumentSearchDataResponse();
+        return modelMapper.map(getDocumentSearchDataAppResponse, GetDocumentSearchDataResponse.class);
     }
 
     GetDocumentStructureResponse createGetDocumentStructureResponse(GetDocumentStructureAppResponse getDocumentStructureAppResponse) {
-        // TODO
-        return new GetDocumentStructureResponse();
+        return modelMapper.map(getDocumentStructureAppResponse, GetDocumentStructureResponse.class);
     }
 
     GetDocumentPageDataResponse createGetPageDataResponse(GetDocumentPageDataAppResponse getDocumentPageDataAppResponse) {
-        // TODO
-        return new GetDocumentPageDataResponse();
+        return modelMapper.map(getDocumentPageDataAppResponse, GetDocumentPageDataResponse.class);
     }
 
 }
