@@ -1,4 +1,3 @@
-
 // https://ja.nuxtjs.org
 // https://typescript.nuxtjs.org/ja/
 // https://github.com/vuejs/composition-api
@@ -8,11 +7,14 @@
 // https://qiita.com/reireias/items/3688ff593185a79d521b
 // https://github.com/nuxt-community/vuetify-module
 
+// nuxtjs/markdownit
+// https://blog.nakamu.life/posts/vue-markdown-nuxtjs-markdownit
+
 import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
 
 // export default {
-const nuxtConfig: Configuration =  {
+const nuxtConfig: Configuration = {
   mode: 'spa',
   /*
    ** Headers of the page
@@ -41,9 +43,7 @@ const nuxtConfig: Configuration =  {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '@/plugins/composition-api'
-  ],
+  plugins: ['@/plugins/composition-api'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -61,8 +61,12 @@ const nuxtConfig: Configuration =  {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    injected: true
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
