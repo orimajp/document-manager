@@ -12,6 +12,7 @@
 
 import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 
 // export default {
 const nuxtConfig: Configuration = {
@@ -50,9 +51,13 @@ const nuxtConfig: Configuration = {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
+    '@nuxtjs/proxy',
     '@nuxtjs/vuetify',
     '@nuxt/typescript-build'
   ],
+  proxy: {
+    '/v1': 'http://localhost:8080'
+  },
   vuetify: {
     /* module options */
   },
@@ -80,6 +85,12 @@ const nuxtConfig: Configuration = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  }
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $axios: NuxtAxiosInstance
   }
 }
 
