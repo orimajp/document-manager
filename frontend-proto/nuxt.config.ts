@@ -9,10 +9,14 @@
 
 // nuxtjs/markdownit
 // https://blog.nakamu.life/posts/vue-markdown-nuxtjs-markdownit
+// https://github.com/nuxt-community/modules/issues/245
+// https://blog.nakamu.life/posts/highlight-js
+// https://www.npmjs.com/package/highlightjs-vue
 
 import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
+//import hljs from "~/highlight.js/lib/highlight"
 
 // export default {
 const nuxtConfig: Configuration = {
@@ -40,7 +44,12 @@ const nuxtConfig: Configuration = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'github-markdown-css',
+//    'highlight.js/styles/github.css'
+//    '~/node_modules/highlight.js/styles/github.css'
+    '~/node_modules/highlight.js/styles/github-gist.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -70,7 +79,23 @@ const nuxtConfig: Configuration = {
     '@nuxtjs/markdownit'
   ],
   markdownit: {
-    injected: true
+    injected: true,
+    highlight: (str: string, lang: string) => {
+      const hljs = require('highlight.js')
+      const hljsDefineVue = require('highlightjs-vue')
+      hljsDefineVue(hljs)
+      hljs.initHighlightingOnLoad()
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch (__) {}
+        return '' // use external default escaping
+      }
+    },
+    use: [
+//      'highlight.js'
+//      'markdown-it-highlightjs'
+    ]
   },
   /*
    ** Axios module configuration

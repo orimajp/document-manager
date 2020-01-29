@@ -16,6 +16,10 @@
     "@nuxtjs/axios": "^5.9.3",
     "@nuxtjs/markdownit": "^1.2.7",
     "@vue/composition-api": "^0.3.4",
+    "github-markdown-css": "^3.0.1",
+    "highlight.js": "^9.18.0",
+    "highlightjs-vue": "^1.0.0",
+    "markdown-it": "^10.0.0",
     "nuxt": "^2.11.0"
   },
   "devDependencies": {

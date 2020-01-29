@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div v-html="$md.render(model)" />
+    <div class="markdown-body">
+      <div v-html="$md.render(model)" />
+    </div>
   </div>
 </template>
 
