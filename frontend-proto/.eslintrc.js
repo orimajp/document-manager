@@ -5,10 +5,10 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+//    parser: 'babel-eslint'
   },
   extends: [
-    '@nuxtjs',
+//    '@nuxtjs',
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
@@ -21,5 +21,12 @@ module.exports = {
   // add your custom rules here
   rules: {
     'space-before-function-paren': 0,
+//    'semi': ['error', 'never',  {'beforeStatementContinuationChars': 'never'}],
+//    "semi-spacing": ["error", {"after": true, "before": false}],
+//    "semi-style": ["error", "first"],
+//    "no-extra-semi": "error",
+//    "no-unexpected-multiline": "error",
+//    "no-unreachable": "error"
+//    'semi': ['error', 'never'],
   }
 }

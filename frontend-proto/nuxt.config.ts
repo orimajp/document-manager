@@ -13,10 +13,12 @@
 // https://blog.nakamu.life/posts/highlight-js
 // https://www.npmjs.com/package/highlightjs-vue
 
+// eslint
+// https://qiita.com/yoh_zzzz/items/9e2611b7a994427474f6
+
 import { Configuration } from '@nuxt/types'
-import colors from 'vuetify/es5/util/colors'
+//  import colors from 'vuetify/es5/util/colors'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-//import hljs from "~/highlight.js/lib/highlight"
 
 // export default {
 const nuxtConfig: Configuration = {
@@ -46,8 +48,8 @@ const nuxtConfig: Configuration = {
    */
   css: [
     'github-markdown-css',
-//    'highlight.js/styles/github.css'
-//    '~/node_modules/highlight.js/styles/github.css'
+    //    'highlight.js/styles/github.css'
+    //    '~/node_modules/highlight.js/styles/github.css'
     '~/node_modules/highlight.js/styles/github-gist.css'
   ],
   /*
@@ -93,8 +95,8 @@ const nuxtConfig: Configuration = {
       }
     },
     use: [
-//      'highlight.js'
-//      'markdown-it-highlightjs'
+      //      'highlight.js'
+      //      'markdown-it-highlightjs'
     ]
   },
   /*
@@ -109,7 +111,7 @@ const nuxtConfig: Configuration = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config: any, ctx: any) {}
   }
 }
 
