@@ -55,7 +55,7 @@ const nuxtConfig: Configuration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/composition-api'],
+  plugins: ['@/plugins/composition-api', '@/plugins/vue-draggable-nested-tree'],
   /*
    ** Nuxt.js dev-modules
    */
