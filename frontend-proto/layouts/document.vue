@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar color="indigo" fixed>
+    <v-app-bar color="indigo" dark fixed>
       <v-toolbar-title>ドキュメントツリーテスト</v-toolbar-title>
     </v-app-bar>
     <v-content class="container-box">
