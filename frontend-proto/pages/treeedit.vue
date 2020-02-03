@@ -6,11 +6,11 @@
           <div slot-scope="{ data, store }">
             <template v-if="!data.isDragPlaceHolder">
               <b
-                v-if="data.children &amp;&amp; data.children.length"
+                v-if="data.children && data.children.length"
                 @click="store.toggleOpen(data)"
               >
-                {{ data.open ? '-' : '+' }}&nbsp;</b
-              >
+                {{ data.open ? '-' : '+' }}&nbsp;
+              </b>
               <span>{{ data.text }}</span>
             </template>
           </div>
@@ -42,7 +42,7 @@
 // https://github.com/phphe/vue-draggable-nested-tree
 // https://www.npmjs.com/package/tree-helper
 // https://github.com/phphe/tree-helper
-import { breadthFirstSearch } from 'tree-helper'
+// import { breadthFirstSearch } from 'tree-helper'
 export default {
   data() {
     return {
@@ -59,8 +59,9 @@ export default {
     }
   },
   methods: {
+    /*
     expandAll(): void {
-      breadthFirstSearch(this.tree1data, (node: { open: boolean }) => {
+      breadthFirstSearch(this.tree1data, node => {
         node.open = true
       })
     },
@@ -69,6 +70,7 @@ export default {
         node.open = false
       })
     }
+    */
   }
 }
 </script>

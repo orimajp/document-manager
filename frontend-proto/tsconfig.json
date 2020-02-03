@@ -20,7 +20,8 @@
       ],
       "@/*": [
         "./*"
-      ]
+      ],
+      "tree-helper": ["types/tree-helper"]
     },
     "types": [
       "@types/node",
