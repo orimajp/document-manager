@@ -16,6 +16,7 @@
 // eslint
 // https://qiita.com/yoh_zzzz/items/9e2611b7a994427474f6
 
+import * as path from 'path'
 import { Configuration } from '@nuxt/types'
 //  import colors from 'vuetify/es5/util/colors'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
@@ -23,6 +24,7 @@ import { NuxtAxiosInstance } from '@nuxtjs/axios'
 // export default {
 const nuxtConfig: Configuration = {
   mode: 'spa',
+  srcDir: 'app',
   /*
    ** Headers of the page
    */
@@ -40,6 +42,17 @@ const nuxtConfig: Configuration = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
+   ** for IntelliJ IDEA / WebStorm
+   */
+  resolve: {
+    extensions: ['.js', '.json', '.vue', '.ts'],
+    //    root: path.resolve(__dirname, 'app/'),
+    alias: {
+      '@': path.resolve(__dirname, 'app/'),
+      '~': path.resolve(__dirname, 'app/')
+    }
+  },
+  /*
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
@@ -50,7 +63,7 @@ const nuxtConfig: Configuration = {
     'github-markdown-css',
     //    'highlight.js/styles/github.css'
     //    '~/node_modules/highlight.js/styles/github.css'
-    '~/node_modules/highlight.js/styles/github-gist.css'
+    '../node_modules/highlight.js/styles/github-gist.css'
   ],
   /*
    ** Plugins to load before mounting the App
