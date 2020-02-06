@@ -1,17 +1,23 @@
 <template>
   <div>
+    <!--
     <h2 @click="showChildren = !showChildren">
       {{ open }} {{ node.contents.label }}
     </h2>
+    -->
+    <h2 @click="openChildren">{{ open }} {{ node.contents.label }}</h2>
 
-    <div v-if="showChildren">
+    <div v-if="showChildren" ref="parent">
       <NestedTree
-        :key="index"
         v-for="(child, index) in node.nodes"
+        ref="tree"
+        :key="index"
         :node="child"
         :style="indent"
         :depth="depth + 1"
-      ></NestedTree>
+        :ignore-list="getIgnoreList"
+        @closeOtherChildren="closeChildren"
+      />
     </div>
   </div>
 </template>
@@ -24,13 +30,22 @@ export default {
   components: { NestedTree },
   //  props: ['node', 'depth'],
   props: {
-    // eslint-disable-next-line vue/require-default-prop
-    node: Object,
-    // eslint-disable-next-line vue/require-default-prop
-    depth: Number
+    node: {
+      type: Object,
+      required: true
+    },
+    depth: {
+      type: Number,
+      required: true
+    },
+    ignoreList: {
+      type: Array,
+      required: true
+    }
   },
   data: () => ({
-    showChildren: false
+    showChildren: false,
+    list: []
   }),
   computed: {
     indent() {
@@ -47,6 +62,47 @@ export default {
       }
 
       return '-'
+    },
+
+    getIgnoreList() {
+      console.log(this.ignoreList)
+      const addedList = this.ignoreList.concat(this.node.index)
+      console.log(addedList)
+      return addedList
+    }
+  },
+  /*
+  mounted() {
+    console.log(this.ignoreList)
+    this.list = this.ignoreList.concat(this.node.index)
+  },
+  */
+  methods: {
+    openChildren() {
+      console.log('openChildren() called.')
+      console.log(this.ignoreList)
+      //      this.$emit('closeOtherChildren', this.node.index)
+      // this.$emit('closeOtherChildren', this.ignoreList.push(this.node.index))
+      this.showChildren = true
+    },
+    /*
+    closeChildren(ignoreIndex) {
+      console.log('closeChildren() called. ignoreIndex=' + ignoreIndex)
+      if (this.node.index === ignoreIndex) {
+        return
+      }
+      this.showChildren = false
+    }
+    */
+    closeChildren(ignoreLists) {
+      console.log('closeChildren() called.')
+      console.log(ignoreLists)
+      /*
+      if (ignoreLists.contain(this.node.index)) {
+        return
+      }
+       */
+      // this.showChildren = false
     }
   }
 }
