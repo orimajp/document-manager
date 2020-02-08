@@ -1,40 +1,20 @@
 <template>
-  <NestedTree
+  <NestedTree2
     :node="tree"
-    :depth="1"
-    :ignore-list="ignoreList"
+    :index-array="indexArray"
     @openChildren="openChildren"
   />
 </template>
 
 <script>
-import NestedTree from './NestedTree'
-
-class IndexManager {
-  constructor(array) {
-    this.array = array
-    this.size = array.length
-    this.current = 0
-  }
-
-  getCurrent() {
-    if (this.current >= this.size) {
-      return null
-    }
-    return this.array[this.current]
-  }
-
-  goNext() {
-    this.current++
-  }
-}
+import NestedTree2 from './NestedTree2'
 
 export default {
   components: {
-    NestedTree
+    NestedTree2
   },
   data: () => ({
-    ignoreList: [],
+    indexArray: [],
     tree: {
       contents: { label: '1' },
       expand: false,
@@ -94,44 +74,25 @@ export default {
     }
   }),
   methods: {
-    closeChildren(ignoreIndex) {
-      // eslint-disable-next-line no-console
-      console.log('top layer: ignoreIndex=' + ignoreIndex)
-    },
-    openChildren(openList) {
-      console.log('TreeSidebar#openChilren() called.')
-      console.log(openList)
-      const mng = new IndexManager(openList)
+    openChildren(list) {
+      console.log('TreeSidebar2#openChildren() called.')
+      console.log(list)
       this.tree.expand = false
-      //      this.tree.expand = true
-      this.openElement(this.tree, mng)
+      this.openNode(this.tree, list)
     },
-    openElement(node, mng) {
-      console.log('openElement() called.')
-      console.log(node)
-      console.log(mng)
-      const current = mng.getCurrent()
-
-      console.log(`openElement()#current=${current} node.index=${node.index}`)
-
-      if (current === null) {
-        console.log('null')
+    openNode(node, list) {
+      console.log('openNode called.')
+      node.expand = !!list.includes(node.index)
+      if (!node.expand) {
         return
       }
-      if (current === undefined) {
-        console.log('undefined')
+      if (!node.nodes) {
         return
       }
-      if (current === node.index) {
-        node.expand = true
-        mng.goNext()
-      }
-      for (let i = 0; node.nodes && i < node.nodes.length; i++) {
-        this.openElement(node.nodes[i], mng)
+      for (let i = 0; i < node.nodes.length; i++) {
+        this.openNode(node.nodes[i], list)
       }
     }
   }
 }
 </script>
-
-<style></style>

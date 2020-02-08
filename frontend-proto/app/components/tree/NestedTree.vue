@@ -5,9 +5,11 @@
       {{ open }} {{ node.contents.label }}
     </h2>
     -->
-    <h2 @click="openChildren">{{ open }} {{ node.contents.label }}</h2>
+    <h2 @click="openChildren(getIgnoreList)">
+      {{ open }} {{ node.contents.label }}
+    </h2>
 
-    <div v-if="showChildren" ref="parent">
+    <div v-if="node.expand" ref="parent">
       <NestedTree
         v-for="(child, index) in node.nodes"
         ref="tree"
@@ -16,7 +18,7 @@
         :style="indent"
         :depth="depth + 1"
         :ignore-list="getIgnoreList"
-        @closeOtherChildren="closeChildren"
+        @openChildren="openChildren(getIgnoreList)"
       />
     </div>
   </div>
@@ -78,12 +80,13 @@ export default {
   },
   */
   methods: {
-    openChildren() {
+    openChildren(list) {
       console.log('openChildren() called.')
-      console.log(this.ignoreList)
+      // console.log(this.ignoreList)
       //      this.$emit('closeOtherChildren', this.node.index)
       // this.$emit('closeOtherChildren', this.ignoreList.push(this.node.index))
-      this.showChildren = true
+      // this.showChildren = true
+      this.$emit('openChildren', list)
     },
     /*
     closeChildren(ignoreIndex) {
