@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h2 @click="openChildren(addCurrentList)">
+    <h2 @click="openChildren(addIdArray)">
       {{ open }} {{ node.contents.label }}
     </h2>
     <div v-if="node.expand">
       <NestedTree2
         v-for="(child, index) in node.nodes"
         :key="index"
-        :style="indent"
-        :index-array="addCurrentList"
+        :id-array="addIdArray"
         :node="child"
+        class="indent"
         @openChildren="openChildren"
       />
     </div>
@@ -28,26 +28,23 @@ export default {
       type: Object,
       required: true
     },
-    indexArray: {
+    idArray: {
       type: Array,
       required: true
     }
   },
   computed: {
-    indent() {
-      return { transform: 'translate(50px)' }
-    },
     open() {
       if (!this.node.nodes) {
         return ''
       }
-      if (this.node.nodes && !this.showChildren) {
+      if (this.node.nodes && !this.node.expand) {
         return '+'
       }
       return '-'
     },
-    addCurrentList() {
-      return this.indexArray.concat(this.node.index)
+    addIdArray() {
+      return this.idArray.concat(this.node.id)
     }
   },
   methods: {
@@ -58,3 +55,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.indent {
+  margin-left: 50px;
+}
+</style>

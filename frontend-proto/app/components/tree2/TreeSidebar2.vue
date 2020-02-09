@@ -1,9 +1,5 @@
 <template>
-  <NestedTree2
-    :node="tree"
-    :index-array="indexArray"
-    @openChildren="openChildren"
-  />
+  <NestedTree2 :node="tree" :id-array="idArray" @openChildren="openChildren" />
 </template>
 
 <script>
@@ -14,33 +10,33 @@ export default {
     NestedTree2
   },
   data: () => ({
-    indexArray: [],
+    idArray: [],
     tree: {
       contents: { label: '1' },
       expand: false,
-      index: 1,
+      id: 1,
       nodes: [
         {
           contents: { label: '2.1' },
           expand: false,
-          index: 2,
+          id: 2,
           nodes: [
             {
               contents: { label: '3.1' },
               expand: false,
-              index: 3,
+              id: 3,
               nodes: [
-                { contents: { label: '4.1' }, expand: false, index: 4 },
-                { contents: { label: '4.2' }, expand: false, index: 5 }
+                { contents: { label: '4.1' }, expand: false, id: 4 },
+                { contents: { label: '4.2' }, expand: false, id: 5 }
               ]
             },
             {
               contents: { label: '3.2' },
               expand: false,
-              index: 6,
+              id: 6,
               nodes: [
-                { contents: { label: '4.1' }, expand: false, index: 7 },
-                { contents: { label: '4.2' }, expand: false, index: 8 }
+                { contents: { label: '4.1' }, expand: false, id: 7 },
+                { contents: { label: '4.2' }, expand: false, id: 8 }
               ]
             }
           ]
@@ -48,24 +44,24 @@ export default {
         {
           contents: { label: '2.2' },
           expand: false,
-          index: 9,
+          id: 9,
           nodes: [
             {
               contents: { label: '3.1' },
               expand: false,
-              index: 10,
+              id: 10,
               nodes: [
-                { contents: { label: '4.1' }, expand: false, index: 11 },
-                { contents: { label: '4.2' }, expand: false, index: 12 }
+                { contents: { label: '4.1' }, expand: false, id: 11 },
+                { contents: { label: '4.2' }, expand: false, id: 12 }
               ]
             },
             {
               contents: { label: '3.2' },
               expand: false,
-              index: 13,
+              id: 13,
               nodes: [
-                { contents: { label: '4.1' }, expand: false, index: 14 },
-                { contents: { label: '4.2' }, expand: false, index: 15 }
+                { contents: { label: '4.1' }, expand: false, id: 14 },
+                { contents: { label: '4.2' }, expand: false, id: 15 }
               ]
             }
           ]
@@ -77,16 +73,17 @@ export default {
     openChildren(list) {
       console.log('TreeSidebar2#openChildren() called.')
       console.log(list)
+      console.log('select id=' + list[list.length - 1])
       this.tree.expand = false
       this.openNode(this.tree, list)
     },
     openNode(node, list) {
-      console.log('openNode called.')
-      node.expand = !!list.includes(node.index)
-      if (!node.expand) {
+      console.log('openNode called. id=' + node.id)
+      if (!node.nodes) {
         return
       }
-      if (!node.nodes) {
+      node.expand = !!list.includes(node.id)
+      if (!node.expand) {
         return
       }
       for (let i = 0; i < node.nodes.length; i++) {
