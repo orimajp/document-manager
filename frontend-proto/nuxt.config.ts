@@ -84,6 +84,7 @@ const nuxtConfig: Configuration = {
   },
   vuetify: {
     /* module options */
+    /* optionsPath: './vuetify.options.js' */
   },
   /*
    ** Nuxt.js modules
